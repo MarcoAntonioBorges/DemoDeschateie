@@ -1,6 +1,6 @@
 package br.com.fiap.DeschateieDemo.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -32,7 +32,7 @@ public class Psicologo extends Usuario{
 	}
 	
 	
-	public Psicologo(String nome, String email, LocalDateTime dataNascimento,
+	public Psicologo(String nome, String email, LocalDate dataNascimento,
 			String login, String senha, NumeroPermissao numeroPermissao,
 			Genero genero, Long crp, String formacao, String biografia,
 			Long telefone, Double valorConsulta) {
@@ -47,10 +47,10 @@ public class Psicologo extends Usuario{
 
 
 
-	public Psicologo(String nome, String email, LocalDateTime dataNascimento,
+	public Psicologo(String nome, String email, LocalDate dataNascimento,
 			Genero genero, Long crp, String formacao, String biografia,
 			Long telefone, Double valorConsulta) {
-		super(nome, email, dataNascimento, NumeroPermissao.P1, genero);
+		super(nome, email, dataNascimento, NumeroPermissao.P2, genero);
 		this.crp = crp;
 		this.formacao = formacao;
 		this.biografia = biografia;
@@ -62,11 +62,11 @@ public class Psicologo extends Usuario{
 		super();
 	}
 	
-	public Psicologo(String nome, String email, LocalDateTime dataNascimento,
+	public Psicologo(String nome, String email, LocalDate dataNascimento,
 			String login, String senha, Genero genero, Long crp,
 			String formacao, String biografia, Long telefone,
 			Double valorConsulta) {
-		super(nome, email, dataNascimento, login, senha, NumeroPermissao.P1, genero);
+		super(nome, email, dataNascimento, login, senha, NumeroPermissao.P2, genero);
 		this.crp = crp;
 		this.formacao = formacao;
 		this.biografia = biografia;

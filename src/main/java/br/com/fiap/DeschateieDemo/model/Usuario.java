@@ -1,7 +1,7 @@
 package br.com.fiap.DeschateieDemo.model;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -31,7 +31,7 @@ public class Usuario implements Serializable{
 	
 	private String email;
 	
-	private LocalDateTime dataNascimento;
+	private LocalDate dataNascimento;
 	
 	private String login;
 	
@@ -45,7 +45,7 @@ public class Usuario implements Serializable{
 
 	
 	
-	public Usuario(String nome, String email, LocalDateTime dataNascimento,
+	public Usuario(String nome, String email, LocalDate dataNascimento,
 			String login, String senha, Genero genero) {
 		this.nome = nome;
 		this.email = email;
@@ -56,7 +56,7 @@ public class Usuario implements Serializable{
 	}
 	
 
-	public Usuario(String nome, String email, LocalDateTime dataNascimento,
+	public Usuario(String nome, String email, LocalDate dataNascimento,
 			String login, String senha, NumeroPermissao numeroPermissao,
 			Genero genero) {
 		super();
@@ -71,8 +71,21 @@ public class Usuario implements Serializable{
 
 
 
+	public Usuario(Long codigo, String nome, String email, LocalDate dataNascimento, String login, String senha,
+			NumeroPermissao numeroPermissao, Genero genero) {
+		super();
+		this.codigo = codigo;
+		this.nome = nome;
+		this.email = email;
+		this.dataNascimento = dataNascimento;
+		this.login = login;
+		this.senha = senha;
+		this.numeroPermissao = numeroPermissao;
+		this.genero = genero;
+	}
 
-	public Usuario(String nome, String email, LocalDateTime dataNascimento,
+
+	public Usuario(String nome, String email, LocalDate dataNascimento,
 			NumeroPermissao numeroPermissao, Genero genero) {
 		super();
 		this.nome = nome;
@@ -88,7 +101,7 @@ public class Usuario implements Serializable{
 		super();
 	}
 
-	public Usuario(String nome, String email, LocalDateTime dataNascimento,
+	public Usuario(String nome, String email, LocalDate dataNascimento,
 			Genero genero) {
 		super();
 		this.nome = nome;
@@ -121,11 +134,11 @@ public class Usuario implements Serializable{
 		this.email = email;
 	}
 
-	public LocalDateTime getDataNascimento() {
+	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(LocalDateTime dataNascimento) {
+	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 

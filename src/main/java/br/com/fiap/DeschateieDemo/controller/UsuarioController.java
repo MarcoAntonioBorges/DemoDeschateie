@@ -35,7 +35,7 @@ import br.com.fiap.DeschateieDemo.repository.UsuarioRepository;
 public class UsuarioController {
 
 	@Autowired
-	private UsuarioRepository usuarioRepository;
+	private UsuarioRepository repository;
 
 	@GetMapping
 	public Page<UsuarioDTO> listar(@RequestParam(required = false) String nome,
@@ -43,11 +43,11 @@ public class UsuarioController {
 			@PageableDefault(sort = "codigo", direction = Direction.ASC, page = 0, size = 10) Pageable paginacao) {
 		Page<Usuario> usuarios;
 		if (nome != null) {
-			usuarios = usuarioRepository.findByNome(nome, paginacao);
+			usuarios = repository.findByNome(nome, paginacao);
 		} else if (email != null) {
-			usuarios = usuarioRepository.findByEmail(email, paginacao);
+			usuarios = repository.findByEmail(email, paginacao);
 		} else {
-			usuarios = usuarioRepository.findAll(paginacao);
+			usuarios = repository.findAll(paginacao);
 		}
 		return UsuarioDTO.converter(usuarios);
 	}
@@ -55,7 +55,7 @@ public class UsuarioController {
 	@GetMapping("/{codigo}")
 	public ResponseEntity<UsuarioDTO> buscarPorCodigo(
 			@PathVariable Long codigo) {
-		Optional<Usuario> usuarios = usuarioRepository.findById(codigo);
+		Optional<Usuario> usuarios = repository.findById(codigo);
 		if (usuarios.isPresent()) {
 			return ResponseEntity.ok(new UsuarioDTO(usuarios.get()));
 		}
@@ -67,14 +67,14 @@ public class UsuarioController {
 	public ResponseEntity<UsuarioDTO> cadastrar(
 			@RequestBody @Valid UsuarioForm form,
 			UriComponentsBuilder uriBuilder) {
-		Usuario usuarioEncontrado = usuarioRepository.findByEmail(form
+		Usuario usuarioEncontrado = repository.findByEmail(form
 				.getEmail());
 		Usuario usuario;
 		if (usuarioEncontrado != null) {
 			usuario = usuarioEncontrado;
 		} else {
 			usuario = form.converter();
-			usuarioRepository.save(usuario);
+			repository.save(usuario);
 		}
 		URI uri = uriBuilder.path("/usuarios/{codigo}").buildAndExpand(usuario
 				.getCodigo()).toUri();
@@ -85,9 +85,9 @@ public class UsuarioController {
 	@Transactional
 	public ResponseEntity<UsuarioDTO> atualizar(@PathVariable Long codigo,
 			@RequestBody @Valid AtualizacaoUsuarioForm form) {
-		Optional<Usuario> optional = usuarioRepository.findById(codigo);
+		Optional<Usuario> optional = repository.findById(codigo);
 		if (optional.isPresent()) {
-			Usuario usuario = form.atualizar(codigo, usuarioRepository);
+			Usuario usuario = form.atualizar(codigo, repository);
 			return ResponseEntity.ok(new UsuarioDTO(usuario));
 		}
 		return ResponseEntity.notFound().build();
@@ -96,9 +96,9 @@ public class UsuarioController {
 	@DeleteMapping("/{codigo}")
 	@Transactional
 	public ResponseEntity<?> remover(@PathVariable Long codigo) {
-		Optional<Usuario> usuario = usuarioRepository.findById(codigo);
+		Optional<Usuario> usuario = repository.findById(codigo);
 		if (usuario.isPresent()) {
-			usuarioRepository.deleteById(codigo);
+			repository.deleteById(codigo);
 			return ResponseEntity.ok().build();
 		}
 		return ResponseEntity.notFound().build();
@@ -108,9 +108,9 @@ public class UsuarioController {
 	@Transactional
 	public ResponseEntity<UsuarioDTO> atualizarNumeroPermissaoDoUsuario(@PathVariable Long codigo,
 			@RequestBody @Valid AtualizacaoNumeroPermissaoForm form) {
-		Optional<Usuario> optional = usuarioRepository.findById(codigo);
+		Optional<Usuario> optional = repository.findById(codigo);
 		if (optional.isPresent()) {
-			Usuario usuario = form.atualizar(codigo, usuarioRepository);
+			Usuario usuario = form.atualizar(codigo, repository);
 			return ResponseEntity.ok(new UsuarioDTO(usuario));
 		}
 		return ResponseEntity.notFound().build();

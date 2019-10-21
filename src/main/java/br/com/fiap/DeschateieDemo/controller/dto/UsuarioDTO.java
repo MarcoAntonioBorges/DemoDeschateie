@@ -1,10 +1,11 @@
 package br.com.fiap.DeschateieDemo.controller.dto;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import org.springframework.data.domain.Page;
 
 import br.com.fiap.DeschateieDemo.model.Genero;
+import br.com.fiap.DeschateieDemo.model.NumeroPermissao;
 import br.com.fiap.DeschateieDemo.model.Usuario;
 
 public class UsuarioDTO {
@@ -13,7 +14,8 @@ public class UsuarioDTO {
 	private String nome;
 	private String email;
 	private Genero genero;
-	private LocalDateTime dataNascimento;
+	private NumeroPermissao numeroPermissao;
+	private LocalDate dataNascimento;
 	
 	
 	
@@ -23,6 +25,7 @@ public class UsuarioDTO {
 		this.nome = usuario.getNome();
 		this.email = usuario.getEmail();
 		this.genero = usuario.getGenero();
+		this.numeroPermissao = usuario.getNumeroPermissao();
 		this.dataNascimento = usuario.getDataNascimento();
 	}
 	public Long getId() {
@@ -37,9 +40,16 @@ public class UsuarioDTO {
 	public Genero getGenero() {
 		return genero;
 	}
-	public LocalDateTime getDataNascimento() {
+	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
+	public NumeroPermissao getNumeroPermissao() {
+		return numeroPermissao;
+	}
+	public void setNumeroPermissao(NumeroPermissao numeroPermissao) {
+		this.numeroPermissao = numeroPermissao;
+	}
+
 	public static Page<UsuarioDTO> converter(Page<Usuario> usuarios) {
 		return usuarios.map(UsuarioDTO::new);
 	}

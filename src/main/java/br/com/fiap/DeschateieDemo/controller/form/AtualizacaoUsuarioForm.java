@@ -1,6 +1,6 @@
 package br.com.fiap.DeschateieDemo.controller.form;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -16,7 +16,7 @@ public class AtualizacaoUsuarioForm {
 	@NotNull @NotEmpty @Length(max=50, min=3)
 	private String nome;
 	@NotNull
-	private LocalDateTime dataNascimento;
+	private LocalDate dataNascimento;
 	@NotNull
 	private Genero genero;
 	
@@ -26,10 +26,10 @@ public class AtualizacaoUsuarioForm {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public LocalDateTime getDataNascimento() {
+	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
-	public void setDataNascimento(LocalDateTime dataNascimento) {
+	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 	public Genero getGenero() {

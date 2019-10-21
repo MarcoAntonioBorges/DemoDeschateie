@@ -1,15 +1,14 @@
 package br.com.fiap.DeschateieDemo.controller.dto;
 
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.time.LocalDate;
 
 import org.springframework.data.domain.Page;
 
 import br.com.fiap.DeschateieDemo.model.Genero;
+import br.com.fiap.DeschateieDemo.model.NumeroPermissao;
 import br.com.fiap.DeschateieDemo.model.Psicologo;
 
-public class PsicologoDTO{
+public class PsicologoDTO {
 //    "codigo": 1,
 //    "nome": "Marco Antonio Oliveira",
 //    "email": "marco@email.com",
@@ -26,17 +25,15 @@ public class PsicologoDTO{
 	private Long codigo;
 	private String nome;
 	private String email;
-	private LocalDateTime dataNascimento;
+	private LocalDate dataNascimento;
 	private Genero genero;
 	private Long crp;
 	private String formacao;
 	private String biografia;
 	private Long telefone;
 	private Double valorConsulta;
-	
-	
-	
-	
+	private NumeroPermissao numeroPermissao;
+
 	public PsicologoDTO(Psicologo psicologo) {
 		super();
 		this.codigo = psicologo.getCodigo();
@@ -49,12 +46,13 @@ public class PsicologoDTO{
 		this.biografia = psicologo.getBiografia();
 		this.telefone = psicologo.getTelefone();
 		this.valorConsulta = psicologo.getValorConsulta();
+		this.numeroPermissao = psicologo.getNumeroPermissao();
 	}
 
 	public Long getCodigo() {
 		return codigo;
 	}
-	
+
 	public String getNome() {
 		return nome;
 	}
@@ -63,7 +61,7 @@ public class PsicologoDTO{
 		return email;
 	}
 
-	public LocalDateTime getDataNascimento() {
+	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
@@ -91,6 +89,9 @@ public class PsicologoDTO{
 		return valorConsulta;
 	}
 
+	public NumeroPermissao getNumeroPermissao() {
+		return numeroPermissao;
+	}
 
 	public static Page<PsicologoDTO> converter(Page<Psicologo> psicologos) {
 		return psicologos.map(PsicologoDTO::new);

@@ -8,9 +8,9 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
 import br.com.fiap.DeschateieDemo.model.Genero;
-import br.com.fiap.DeschateieDemo.model.Psicologo;
+import br.com.fiap.DeschateieDemo.model.Paciente;
 
-public class PsicologoForm {
+public class PacienteForm {
 
 	@NotEmpty
 	@Length(max = 50, min = 3)
@@ -25,34 +25,26 @@ public class PsicologoForm {
 
 	@NotEmpty
 	private String login;
-	
+
 	@NotEmpty
 	private String senha;
-	
+
 	@NotNull
 	private Genero genero;
 
-	@NotNull
-	private Long crp;
+	@Length(max = 20)
+	private String cep;
 
 	@NotNull
-	@Length(max = 50)
-	private String formacao;
+	private Long cpf;
 
-	@NotNull
 	@Length(max = 500)
-	private String biografia;
+	private String historico;
 
-	@NotNull
-	private Long telefone;
+	private int consultasRealizadas;
 
-	@NotNull
-	private Double valorConsulta;
-
-	public PsicologoForm(String nome, String email,
-			LocalDate dataNascimento, String login, String senha,
-			Genero genero, Long crp, String formacao, String biografia,
-			Long telefone, Double valorConsulta) {
+	public PacienteForm(String nome, String email, LocalDate dataNascimento, String login, String senha,
+			Genero genero, String cep, Long cpf, String historico, int consultasRealizadas) {
 		super();
 		this.nome = nome;
 		this.email = email;
@@ -60,17 +52,15 @@ public class PsicologoForm {
 		this.login = login;
 		this.senha = senha;
 		this.genero = genero;
-		this.crp = crp;
-		this.formacao = formacao;
-		this.biografia = biografia;
-		this.telefone = telefone;
-		this.valorConsulta = valorConsulta;
+		this.cep = cep;
+		this.cpf = cpf;
+		this.historico = historico;
+		this.consultasRealizadas = consultasRealizadas;
 	}
-	
-	public PsicologoForm() {
+
+	public PacienteForm() {
 		super();
 	}
-	
 
 	public String getNome() {
 		return nome;
@@ -120,48 +110,40 @@ public class PsicologoForm {
 		this.genero = genero;
 	}
 
-	public Long getCrp() {
-		return crp;
+	public String getCep() {
+		return cep;
 	}
 
-	public void setCrp(Long crp) {
-		this.crp = crp;
+	public void setCep(String cep) {
+		this.cep = cep;
 	}
 
-	public String getFormacao() {
-		return formacao;
+	public Long getCpf() {
+		return cpf;
 	}
 
-	public void setFormacao(String formacao) {
-		this.formacao = formacao;
+	public void setCpf(Long cpf) {
+		this.cpf = cpf;
 	}
 
-	public String getBiografia() {
-		return biografia;
+	public String getHistorico() {
+		return historico;
 	}
 
-	public void setBiografia(String biografia) {
-		this.biografia = biografia;
+	public void setHistorico(String historico) {
+		this.historico = historico;
 	}
 
-	public Long getTelefone() {
-		return telefone;
+	public int getConsultasRealizadas() {
+		return consultasRealizadas;
 	}
 
-	public void setTelefone(Long telefone) {
-		this.telefone = telefone;
+	public void setConsultasRealizadas(int consultasRealizadas) {
+		this.consultasRealizadas = consultasRealizadas;
 	}
 
-	public Double getValorConsulta() {
-		return valorConsulta;
+	public Paciente converter() {
+		return new Paciente(nome, email, dataNascimento, login, senha, genero, cep, cpf, historico,
+				consultasRealizadas);
 	}
-
-	public void setValorConsulta(Double valorConsulta) {
-		this.valorConsulta = valorConsulta;
-	}
-
-	public Psicologo converter() {
-		return new Psicologo(nome, email, dataNascimento, login, senha, genero, crp, formacao, biografia, telefone, valorConsulta);
-	}
-
 }

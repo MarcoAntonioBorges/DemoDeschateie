@@ -1,6 +1,6 @@
 package br.com.fiap.DeschateieDemo.controller.form;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -19,7 +19,7 @@ public class UsuarioForm {
 	private String email;
 	
 	@NotNull
-	private LocalDateTime dataNascimento;
+	private LocalDate dataNascimento;
 	
 	@NotNull
 	private Genero genero;
@@ -34,7 +34,7 @@ public class UsuarioForm {
 		super();
 	}
 
-	public UsuarioForm(String nome, String email, LocalDateTime dataNascimento,
+	public UsuarioForm(String nome, String email, LocalDate dataNascimento,
 			Genero genero, String login, String senha) {
 		super();
 		this.nome = nome;
@@ -44,6 +44,8 @@ public class UsuarioForm {
 		this.login = login;
 		this.senha = senha;
 	}
+
+	
 
 	public String getNome() {
 		return nome;
@@ -61,11 +63,11 @@ public class UsuarioForm {
 		this.email = email;
 	}
 
-	public LocalDateTime getDataNascimento() {
+	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(LocalDateTime dataNascimento) {
+	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 
@@ -75,6 +77,22 @@ public class UsuarioForm {
 
 	public void setGenero(Genero genero) {
 		this.genero = genero;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	public Usuario converter() {

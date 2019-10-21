@@ -8,81 +8,142 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
 import br.com.fiap.DeschateieDemo.model.Genero;
-import br.com.fiap.DeschateieDemo.model.Psicologo;
-import br.com.fiap.DeschateieDemo.repository.PsicologoRepository;
+import br.com.fiap.DeschateieDemo.model.Periodo;
+import br.com.fiap.DeschateieDemo.model.Voluntario;
+import br.com.fiap.DeschateieDemo.repository.VoluntarioRepository;
 
-public class AtualizacaoPsicologoForm {
+public class AtualizacaoVoluntarioForm {
 
 	
 	@NotNull @NotEmpty @Length(max=50, min=3)
 	private String nome;
+	
 	@NotNull
 	private LocalDate dataNascimento;
+	
 	@NotNull
 	private Genero genero;
+	
 	@NotNull @Length(max = 50)
 	private String formacao;
-	@NotNull @Length(max = 500)
-	private String biografia;
+	
+	@NotNull 
+	private Periodo periodo;
+	
 	@NotNull
 	private Long telefone;
-	@NotNull
-	private Double valorConsulta;
+	
+	
+	
 	public String getNome() {
 		return nome;
 	}
+
+
+
+
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
+
+
+
+
 	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
+
+
+
+
+
 	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
+
+
+
+
+
 	public Genero getGenero() {
 		return genero;
 	}
+
+
+
+
+
 	public void setGenero(Genero genero) {
 		this.genero = genero;
 	}
+
+
+
+
+
 	public String getFormacao() {
 		return formacao;
 	}
+
+
+
+
+
 	public void setFormacao(String formacao) {
 		this.formacao = formacao;
 	}
-	public String getBiografia() {
-		return biografia;
+
+
+
+
+
+	public Periodo getPeriodo() {
+		return periodo;
 	}
-	public void setBiografia(String biografia) {
-		this.biografia = biografia;
+
+
+
+
+
+	public void setPeriodo(Periodo periodo) {
+		this.periodo = periodo;
 	}
+
+
+
+
+
 	public Long getTelefone() {
 		return telefone;
 	}
+
+
+
+
+
 	public void setTelefone(Long telefone) {
 		this.telefone = telefone;
 	}
-	public Double getValorConsulta() {
-		return valorConsulta;
-	}
-	public void setValorConsulta(Double valorConsulta) {
-		this.valorConsulta = valorConsulta;
-	}
-	public Psicologo atualizar(Long codigo,
-			PsicologoRepository psicologoRepository) {
-		Psicologo psicologo = psicologoRepository.getOne(codigo);
+
+
+
+
+
+	public Voluntario atualizar(Long codigo,
+			VoluntarioRepository voluntarioRepository) {
+		Voluntario voluntario = voluntarioRepository.getOne(codigo);
 		
-		psicologo.setNome(this.nome);
-		psicologo.setDataNascimento(this.dataNascimento);
-		psicologo.setGenero(this.genero);
-		psicologo.setFormacao(this.formacao);
-		psicologo.setBiografia(this.biografia);
-		psicologo.setTelefone(this.telefone);
-		psicologo.setValorConsulta(this.valorConsulta);
+		voluntario.setNome(this.nome);
+		voluntario.setDataNascimento(this.dataNascimento);
+		voluntario.setGenero(this.genero);
+		voluntario.setFormacao(this.formacao);
+		voluntario.setPeriodo(this.periodo);
+		voluntario.setTelefone(this.telefone);
 		
-		return psicologo;
+		
+		return voluntario;
 	}
 	
 	

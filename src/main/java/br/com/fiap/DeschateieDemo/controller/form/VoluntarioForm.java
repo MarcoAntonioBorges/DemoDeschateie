@@ -8,9 +8,10 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
 import br.com.fiap.DeschateieDemo.model.Genero;
-import br.com.fiap.DeschateieDemo.model.Psicologo;
+import br.com.fiap.DeschateieDemo.model.Periodo;
+import br.com.fiap.DeschateieDemo.model.Voluntario;
 
-public class PsicologoForm {
+public class VoluntarioForm {
 
 	@NotEmpty
 	@Length(max = 50, min = 3)
@@ -31,137 +32,192 @@ public class PsicologoForm {
 	
 	@NotNull
 	private Genero genero;
-
+	
 	@NotNull
-	private Long crp;
-
+	private String rg;
+	
 	@NotNull
-	@Length(max = 50)
+	private Long cpf;
+
+	@NotNull @Length(max = 50)
 	private String formacao;
-
+	
 	@NotNull
+	private Periodo periodo;
+	
 	@Length(max = 500)
-	private String biografia;
-
+	private String comentario;
+	
 	@NotNull
 	private Long telefone;
-
-	@NotNull
-	private Double valorConsulta;
-
-	public PsicologoForm(String nome, String email,
-			LocalDate dataNascimento, String login, String senha,
-			Genero genero, Long crp, String formacao, String biografia,
-			Long telefone, Double valorConsulta) {
-		super();
-		this.nome = nome;
-		this.email = email;
-		this.dataNascimento = dataNascimento;
-		this.login = login;
-		this.senha = senha;
-		this.genero = genero;
-		this.crp = crp;
-		this.formacao = formacao;
-		this.biografia = biografia;
-		this.telefone = telefone;
-		this.valorConsulta = valorConsulta;
-	}
-	
-	public PsicologoForm() {
-		super();
-	}
 	
 
 	public String getNome() {
 		return nome;
 	}
 
+
+
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
+
+
 
 	public String getEmail() {
 		return email;
 	}
 
+
+
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+
+
 
 	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
+
+
+
 	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
+
+
+
 
 	public String getLogin() {
 		return login;
 	}
 
+
+
+
 	public void setLogin(String login) {
 		this.login = login;
 	}
+
+
+
 
 	public String getSenha() {
 		return senha;
 	}
 
+
+
+
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+
+
+
 
 	public Genero getGenero() {
 		return genero;
 	}
 
+
+
+
 	public void setGenero(Genero genero) {
 		this.genero = genero;
 	}
 
-	public Long getCrp() {
-		return crp;
+
+
+
+	public String getRg() {
+		return rg;
 	}
 
-	public void setCrp(Long crp) {
-		this.crp = crp;
+
+
+
+	public void setRg(String rg) {
+		this.rg = rg;
 	}
+
+	public Long getCpf() {
+		return cpf;
+	}
+
+
+
+
+	public void setRg(Long cpf) {
+		this.cpf = cpf;
+	}
+
+
 
 	public String getFormacao() {
 		return formacao;
 	}
 
+
+
+
 	public void setFormacao(String formacao) {
 		this.formacao = formacao;
 	}
 
-	public String getBiografia() {
-		return biografia;
+
+
+
+	public Periodo getPeriodo() {
+		return periodo;
 	}
 
-	public void setBiografia(String biografia) {
-		this.biografia = biografia;
+
+
+
+	public void setPeriodo(Periodo periodo) {
+		this.periodo = periodo;
 	}
+
+
+
+
+	public String getComentario() {
+		return comentario;
+	}
+
+
+
+
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
+	}
+
+
+
 
 	public Long getTelefone() {
 		return telefone;
 	}
 
+
+
+
 	public void setTelefone(Long telefone) {
 		this.telefone = telefone;
 	}
 
-	public Double getValorConsulta() {
-		return valorConsulta;
-	}
 
-	public void setValorConsulta(Double valorConsulta) {
-		this.valorConsulta = valorConsulta;
-	}
 
-	public Psicologo converter() {
-		return new Psicologo(nome, email, dataNascimento, login, senha, genero, crp, formacao, biografia, telefone, valorConsulta);
+
+	public Voluntario converter() {
+		return new Voluntario(nome, email, dataNascimento, login, senha, genero, rg, cpf, formacao, periodo, comentario, telefone);
 	}
 
 }

@@ -33,7 +33,7 @@ import br.com.fiap.DeschateieDemo.repository.PsicologoRepository;
 public class PsicologoController {
 
 	@Autowired
-	private PsicologoRepository psicologoRepository;
+	private PsicologoRepository repository;
 
 	@GetMapping
 	public Page<PsicologoDTO> listar(
@@ -42,18 +42,18 @@ public class PsicologoController {
 			@PageableDefault(sort = "codigo", direction = Direction.ASC, page = 0, size = 10) Pageable paginacao) {
 		Page<Psicologo> psicologos;
 		if(nome != null) {
-			psicologos = psicologoRepository.findByNome(nome, paginacao);
+			psicologos = repository.findByNome(nome, paginacao);
 		}else if(email != null) {
-			psicologos = psicologoRepository.findByEmail(email, paginacao);
+			psicologos = repository.findByEmail(email, paginacao);
 		}else {
-			psicologos = psicologoRepository.findAll(paginacao);			
+			psicologos = repository.findAll(paginacao);			
 		}
 		return PsicologoDTO.converter(psicologos);
 	}
 
 	@GetMapping("/{codigo}")
 	public ResponseEntity<PsicologoDTO> buscarPorCodigo(@PathVariable Long codigo){
-		Optional<Psicologo> psicologo = psicologoRepository.findById(codigo);
+		Optional<Psicologo> psicologo = repository.findById(codigo);
 		if(psicologo.isPresent()) {
 			return ResponseEntity.ok(new PsicologoDTO(psicologo.get()));
 		}
@@ -63,8 +63,9 @@ public class PsicologoController {
 	@PostMapping
 	@Transactional
 	public ResponseEntity<PsicologoDTO> cadastrar(@RequestBody @Valid PsicologoForm form, UriComponentsBuilder uriBuilder){
+		
 		Psicologo psicologo = form.converter();
-		psicologoRepository.save(psicologo);
+		repository.save(psicologo);
 		
 		URI uri = uriBuilder.path("/psicologos/{codigo}").buildAndExpand(psicologo
 				.getCodigo()).toUri();
@@ -75,9 +76,9 @@ public class PsicologoController {
 	@Transactional
 	public ResponseEntity<PsicologoDTO> atualizar(@PathVariable Long codigo,
 			@RequestBody @Valid AtualizacaoPsicologoForm form){
-		Optional<Psicologo> optional = psicologoRepository.findById(codigo);
+		Optional<Psicologo> optional = repository.findById(codigo);
 		if(optional.isPresent()) {
-			Psicologo psicologo = form.atualizar(codigo, psicologoRepository);
+			Psicologo psicologo = form.atualizar(codigo, repository);
 			return ResponseEntity.ok(new PsicologoDTO(psicologo));
 		}
 		return ResponseEntity.notFound().build();
